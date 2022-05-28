@@ -1,0 +1,48 @@
+<h2>Dosyalar</h2>
+
+
+<mat-form-field appearance="outline">
+  <input matInput placeholder="Aranacak Bir Değer Giriniz" (keyup)="Filterele($event)">
+</mat-form-field>
+
+<button mat-fab matTooltip="Dosya Ekle" color="primary" (click)="Ekle()"><mat-icon aria-label="label" >add</mat-icon></button>
+
+<mat-table [dataSource]="dataSource" matSort>
+    
+  <ng-container matColumnDef="dosyaAdı">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Ad Soyad
+    </mat-header-cell>
+    <mat-cell *matCellDef="let kayit"> {{kayit.dosyaAdı} </mat-cell>
+  </ng-container>
+   
+  <ng-container matColumnDef="dosyaTuru">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Mail
+    </mat-header-cell>
+    <mat-cell *matCellDef="let kayit"> {{kayit.dosyaIcerigi}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="dosyaTuru ">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Doğum Tarihi
+    </mat-header-cell>
+    <mat-cell *matCellDef="let kayit"> {{kayit.dosyaTuru}} </mat-cell>
+  </ng-container>
+  
+
+  <ng-container matColumnDef="islemler">
+    <mat-header-cell *matHeaderCellDef> İşlemler
+    </mat-header-cell>
+    <mat-cell *matCellDef="let kayit">
+      <button mat-icon-button color="primary" matTooltip="Dosya Liste" [routerLink]="['/dosyaliste',kayit.KulId]">
+        <mat-icon aria-label="label">list</mat-icon>
+      </button>
+      <button mat-icon-button color="primary" matTooltip="Kullanici Düzenle" (click)="Duzenle(kayit)">
+        <mat-icon aria-label="label">edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" matTooltip="Kullanici Sil"   (click)="Sil(kayit)" >
+        <mat-icon aria-label="label">delete</mat-icon>
+      </button>
+
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
